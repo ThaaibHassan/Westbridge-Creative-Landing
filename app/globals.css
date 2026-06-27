@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Westbridge Creative Studio — design tokens
+ * Strict black & white editorial system — dark mode. Background is black,
+ * type is white. Emphasis comes from scale, weight, and hairlines — never colour.
+ * ------------------------------------------------------------------ */
+@theme {
+  --color-paper: #000000;
+  --color-paper-deep: #111111;
+  --color-ink: #ffffff;
+  --color-ink-soft: #b0b0b0;
+  --color-ink-muted: #777777;
+  --color-line: #ffffff;
+  --color-accent: #ffffff;
+  --color-accent-soft: #cccccc;
+
+  /* Single, simple typeface — Inter — across the whole site. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --tracking-label: 0.18em;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@layer utilities {
+  /* Thin editorial hairline */
+  .hairline {
+    border-color: color-mix(in srgb, var(--color-line) 14%, transparent);
+  }
+
+  /* Used to clip text rows for staggered line reveals */
+  .reveal-line {
+    overflow: hidden;
+    display: block;
+  }
+
+  /* Fluid display type — Inter, bold, tight tracking */
+  .text-display {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+
+  .label {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
