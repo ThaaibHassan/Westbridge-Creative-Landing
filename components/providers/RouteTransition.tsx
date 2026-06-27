@@ -31,14 +31,13 @@ export function useRouteTransition(): RouteTransitionContextValue {
 }
 
 /** Approximate fill duration of the loading screen, in seconds. */
-const FILL_DURATION = 3;
+const FILL_DURATION = 2;
 
 export default function RouteTransition({ children }: { children: ReactNode }) {
   const router = useRouter();
   const overlayRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const counterWrapRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
   const animatingRef = useRef(false);
 
@@ -73,10 +72,9 @@ export default function RouteTransition({ children }: { children: ReactNode }) {
       const overlay = overlayRef.current;
       const line = lineRef.current;
       const track = trackRef.current;
-      const counterWrap = counterWrapRef.current;
       const counterEl = counterRef.current;
 
-      if (!overlay || !line || !track || !counterWrap || !counterEl) {
+      if (!overlay || !line || !track || !counterEl) {
         router.push(href);
         return;
       }
@@ -104,39 +102,31 @@ export default function RouteTransition({ children }: { children: ReactNode }) {
 
       if (prefersReduced) {
         gsap.set(overlay, { autoAlpha: 1 });
-        counterEl.textContent = "100";
+        counterEl.textContent = "100%";
         gsap.set(line, { scaleX: 1, transformOrigin: "left center" });
         gsap.delayedCall(0.25, finish);
         return;
       }
 
-      const trackWidth = track.offsetWidth;
       const progress = { v: 0 };
 
       gsap.set(overlay, { autoAlpha: 1 });
       gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
-      gsap.set(counterWrap, { x: 0 });
-      counterEl.textContent = "0";
+      counterEl.textContent = "0%";
 
       const tl = gsap.timeline({ onComplete: finish });
-      tl.to(line, { scaleX: 1, duration: FILL_DURATION, ease: "power1.inOut" }, 0)
-        .to(
-          counterWrap,
-          { x: trackWidth, duration: FILL_DURATION, ease: "power1.inOut" },
-          0,
-        )
-        .to(
-          progress,
-          {
-            v: 100,
-            duration: FILL_DURATION,
-            ease: "power1.inOut",
-            onUpdate: () => {
-              counterEl.textContent = String(Math.round(progress.v));
-            },
+      tl.to(line, { scaleX: 1, duration: FILL_DURATION, ease: "power1.inOut" }, 0).to(
+        progress,
+        {
+          v: 100,
+          duration: FILL_DURATION,
+          ease: "power1.inOut",
+          onUpdate: () => {
+            counterEl.textContent = `${Math.round(progress.v)}%`;
           },
-          0,
-        );
+        },
+        0,
+      );
     },
     [router],
   );
@@ -153,13 +143,13 @@ export default function RouteTransition({ children }: { children: ReactNode }) {
         style={{ pointerEvents: "none" }}
       >
         <div ref={trackRef} className="relative w-[min(62vw,560px)]">
-          <div ref={lineRef} className="h-px w-full bg-white" />
-          <div ref={counterWrapRef} className="absolute bottom-3 left-0">
+          <div ref={lineRef} className="h-px w-full origin-left bg-white" />
+          <div className="absolute -top-9 right-0">
             <span
               ref={counterRef}
-              className="block -translate-x-1/2 text-2xl font-light tabular-nums text-white"
+              className="block text-2xl font-light tabular-nums text-white"
             >
-              0
+              0%
             </span>
           </div>
         </div>

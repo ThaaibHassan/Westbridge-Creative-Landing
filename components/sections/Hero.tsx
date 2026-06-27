@@ -29,6 +29,11 @@ export default function Hero() {
           "[data-hero-eyebrow]",
           { y: 16, opacity: 0, duration: 0.9 },
           0.8,
+        )
+        .from(
+          "[data-hero-gradient]",
+          { scaleX: 0, opacity: 0, duration: 1.1, transformOrigin: "left center" },
+          1,
         );
     },
     { scope: ref },
@@ -38,11 +43,12 @@ export default function Hero() {
     <section
       ref={ref}
       id="top"
-      className="relative flex min-h-svh flex-col overflow-x-clip bg-paper px-6 pb-8 pt-28 text-ink md:px-10 md:pb-10 md:pt-32"
+      className="relative flex h-svh min-h-0 flex-col overflow-hidden bg-paper pt-28 text-ink md:pt-32"
     >
-      <div className="mx-auto flex w-full max-w-[1400px] flex-1 flex-col">
-        {/* Upper region: media + actions */}
-        <div className="grid flex-1 grid-cols-1 gap-8 md:grid-cols-12">
+      <div className="flex min-h-0 flex-1 flex-col px-6 md:px-10">
+        <div className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col">
+          {/* Upper region: media + actions */}
+          <div className="grid min-h-0 flex-1 grid-cols-1 gap-8 md:grid-cols-12">
           {/* Left media panel — drop a real <Image> here later */}
           <div
             data-hero-media
@@ -104,8 +110,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Bottom: oversized wordmark — full section width so it never clips */}
-        <div className="mt-10 w-full md:mt-8">
+        {/* Bottom: oversized wordmark — pinned above the gradient strip */}
+        <div className="mt-auto w-full shrink-0 pb-6 md:pb-8">
           <span
             data-hero-eyebrow
             className="mb-3 block text-base italic text-ink/45 md:mb-4 md:text-lg"
@@ -119,9 +125,16 @@ export default function Hero() {
             className="text-display w-full max-w-full whitespace-nowrap font-bold leading-[0.85] tracking-[-0.045em] text-[clamp(2.75rem,calc((100vw-3rem)/5.65),12.5rem)] md:text-[clamp(3rem,calc((min(100vw,90rem)-5rem)/5.65),13.5rem)]"
             lines={[<span key="wb">WESTBRIDGE</span>]}
           />
-          <span className="mt-6 block h-px w-full bg-white/15 md:mt-8" />
+        </div>
         </div>
       </div>
+
+      {/* Full-width gradient — flush with bottom of viewport */}
+      <span
+        data-hero-gradient
+        aria-hidden
+        className="hero-gradient-bar w-full shrink-0"
+      />
     </section>
   );
 }
