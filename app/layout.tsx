@@ -17,8 +17,8 @@ const SITE_URL = "https://westbridge.studio";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Westbridge — Creative Studio",
-    template: "%s — Westbridge",
+    default: "Westbridge | Creative Studio",
+    template: "%s | Westbridge",
   },
   description:
     "Westbridge is a creative studio crafting brand identities, digital experiences, and premium web design with editorial precision.",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "art direction",
   ],
   openGraph: {
-    title: "Westbridge — Creative Studio",
+    title: "Westbridge | Creative Studio",
     description:
       "Brand identities, digital experiences, and premium web design with editorial precision.",
     url: SITE_URL,

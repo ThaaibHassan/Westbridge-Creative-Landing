@@ -7,12 +7,12 @@ import { PROJECTS } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Selected work from Westbridge Creative Studio — brand identities, digital experiences, and premium web design.",
+    "Selected work from Westbridge Creative Studio: brand identities, digital experiences, and premium web design.",
 };
 
 export default function WorkPage() {
   const years = PROJECTS.map((p) => Number(p.year));
-  const range = `${Math.min(...years)} — ${Math.max(...years)}`;
+  const range = `${Math.min(...years)}, ${Math.max(...years)}`;
 
   return (
     <main id="top" className="px-6 pt-32 md:px-10 md:pt-44">
@@ -21,7 +21,7 @@ export default function WorkPage() {
         <Reveal>
           <div className="flex items-center gap-4">
             <span className="h-px w-8 bg-ink" />
-            <span className="label">Westbridge — Projects</span>
+            <span className="label">Westbridge Projects</span>
           </div>
         </Reveal>
 
@@ -63,7 +63,7 @@ export default function WorkPage() {
               href={`/work/${project.slug}`}
               className="group block border-b border-ink/10 py-12 md:py-16"
             >
-              {/* Meta line — index · category · year */}
+              {/* Meta line, index · category · year */}
               <div className="mb-8 flex flex-wrap items-center gap-3">
                 <span className="label">{project.index}</span>
                 <span className="text-ink-muted">·</span>

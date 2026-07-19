@@ -88,7 +88,7 @@ export default function Nav() {
         <TransitionLink
           href="/"
           className="group flex items-center"
-          aria-label="Westbridge — home"
+          aria-label="Westbridge | home"
         >
           <Image
             src="/logo-white.png"

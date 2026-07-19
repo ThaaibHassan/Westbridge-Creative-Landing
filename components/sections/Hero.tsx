@@ -49,7 +49,7 @@ export default function Hero() {
         <div className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col">
           {/* Upper region: media + actions */}
           <div className="grid min-h-0 flex-1 grid-cols-1 gap-8 md:grid-cols-12">
-          {/* Left media panel — drop a real <Image> here later */}
+          {/* Left media panel, drop a real <Image> here later */}
           <div
             data-hero-media
             className="relative min-h-[38vh] overflow-hidden border border-white/10 bg-white/[0.03] md:col-span-5 md:min-h-0 lg:col-span-4"
@@ -70,7 +70,7 @@ export default function Hero() {
               />
             </span>
             <span className="absolute left-5 top-5 label text-ink/40">
-              Westbridge — Studio
+              Westbridge Studio
             </span>
             <span className="absolute bottom-5 left-5 label text-ink/40">
               Est. 2014
@@ -110,7 +110,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Bottom: oversized wordmark — pinned above the gradient strip */}
+        {/* Bottom: oversized wordmark, pinned above the gradient strip */}
         <div className="mt-auto w-full shrink-0 pb-6 md:pb-8">
           <span
             data-hero-eyebrow
@@ -129,7 +129,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Full-width gradient — flush with bottom of viewport */}
+      {/* Full-width gradient, flush with bottom of viewport */}
       <span
         data-hero-gradient
         aria-hidden

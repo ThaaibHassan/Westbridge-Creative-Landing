@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Westbridge",
   fullName: "Westbridge Creative Studio",
-  location: "London — New York",
+  location: "London, New York",
   email: "studio@westbridge.studio",
   availability: "Booking selected projects for 2026",
   responseTime: "Replies within two working days",
@@ -45,7 +45,7 @@ export const SERVICES: Service[] = [
       "Typography, layout, and art-direction rules",
     ],
     pricingFrom: "From £12k",
-    timeline: "6 — 9 weeks",
+    timeline: "6-9 weeks",
     deliverables: [
       "Strategy & positioning document",
       "Logo suite and visual identity",
@@ -58,7 +58,7 @@ export const SERVICES: Service[] = [
     marker: "S.02",
     title: "Digital Experience",
     description:
-      "Considered interfaces and interactions—from first principles to the final pixel—engineered for clarity and feel.",
+      "Considered interfaces and interactions, from first principles to the final pixel, engineered for clarity and feel.",
     disciplines: ["Product", "UX / UI", "Prototyping", "Design Systems"],
     scope: [
       "Product and information architecture",
@@ -67,7 +67,7 @@ export const SERVICES: Service[] = [
       "Design system and component library",
     ],
     pricingFrom: "From £18k",
-    timeline: "8 — 12 weeks",
+    timeline: "8-12 weeks",
     deliverables: [
       "UX flows and wireframes",
       "High-fidelity interface design",
@@ -89,7 +89,7 @@ export const SERVICES: Service[] = [
       "Headless CMS and handover",
     ],
     pricingFrom: "From £15k",
-    timeline: "6 — 10 weeks",
+    timeline: "6-10 weeks",
     deliverables: [
       "Responsive website design",
       "Production front-end build",
@@ -102,7 +102,7 @@ export const SERVICES: Service[] = [
     marker: "S.04",
     title: "Care & Iteration",
     description:
-      "Ongoing partnership for brands that keep moving—measured improvements, new pages, and the occasional rethink.",
+      "Ongoing partnership for brands that keep moving, measured improvements, new pages, and the occasional rethink.",
     disciplines: ["Retainer", "Optimisation", "New work", "Support"],
     scope: [
       "Monthly design and build time",
@@ -147,7 +147,7 @@ export const SERVICE_FAQ: Faq[] = [
   {
     question: "Do you offer ongoing maintenance?",
     answer:
-      "We do. After launch, many clients move to a light monthly retainer for iteration, new pages, and performance care—so the work keeps its edge over time.",
+      "We do. After launch, many clients move to a light monthly retainer for iteration, new pages, and performance care, so the work keeps its edge over time.",
   },
 ];
 
@@ -189,10 +189,10 @@ export const PROJECTS: Project[] = [
     tags: ["Strategy", "Identity", "Art Direction"],
     detail: {
       intro:
-        "Norden makes furniture meant to outlast trends. The identity had to feel as considered as the joinery—warm, exact, and unhurried.",
+        "Norden makes furniture meant to outlast trends. The identity had to feel as considered as the joinery, warm, exact, and unhurried.",
       overview: [
         "We began by stripping the brand back to its convictions: material honesty, longevity, and a refusal to shout. From there we built a typographic system with one voice and many registers, so the brand could move between a price tag and a billboard without losing its composure.",
-        "Art direction leans on negative space and natural light. Photography is treated as evidence, not decoration—every frame earns its place, every crop is deliberate. The result is a brand that reads as quietly expensive.",
+        "Art direction leans on negative space and natural light. Photography is treated as evidence, not decoration, every frame earns its place, every crop is deliberate. The result is a brand that reads as quietly expensive.",
       ],
       services: ["Brand Strategy", "Visual Identity", "Art Direction", "Guidelines"],
       deliverables: ["Wordmark & marque", "Type system", "Photo direction", "Brand book"],
@@ -214,10 +214,10 @@ export const PROJECTS: Project[] = [
     liveUrl: "#",
     detail: {
       intro:
-        "Meridian manages serious capital for a small number of families. The product had to feel inevitable—precise, legible, and entirely without noise.",
+        "Meridian manages serious capital for a small number of families. The product had to feel inevitable, precise, legible, and entirely without noise.",
       overview: [
         "We designed a system that treats information as the interface. Dense tables, considered typography, and a strict spacing grid let advisors move quickly while the experience stays composed. Motion is used sparingly, only to clarify cause and effect.",
-        "The build is a component library shared between design and engineering, documented so the platform can grow without drifting. Performance was a first-class requirement—every view loads instantly and behaves predictably.",
+        "The build is a component library shared between design and engineering, documented so the platform can grow without drifting. Performance was a first-class requirement, every view loads instantly and behaves predictably.",
       ],
       services: ["Product Strategy", "UX / UI", "Design System", "Front-end"],
       deliverables: ["Design system", "Dashboard suite", "Component library", "Handover docs"],
@@ -234,12 +234,12 @@ export const PROJECTS: Project[] = [
     role: "Web design & development",
     summary: "An editorial commerce experience for a boutique vintner.",
     description:
-      "An editorial commerce experience for a boutique vintner—part magazine, part shop, fully composed. Long-form storytelling that flows into a frictionless checkout.",
+      "An editorial commerce experience for a boutique vintner, part magazine, part shop, fully composed. Long-form storytelling that flows into a frictionless checkout.",
     tags: ["Web Design", "Motion", "Development"],
     liveUrl: "#",
     detail: {
       intro:
-        "Cobalt & Vine sell a small, fiercely curated list. The site needed to read like a magazine and convert like a shop—without the seams showing.",
+        "Cobalt & Vine sell a small, fiercely curated list. The site needed to read like a magazine and convert like a shop, without the seams showing.",
       overview: [
         "We treated each release as a story. Editorial spreads introduce the maker and the place, then resolve into a calm, confident product page. Scroll pacing is deliberate; nothing rushes the reader, yet purchase is always one gesture away.",
         "Built on a headless stack with motion handled in GSAP and Lenis, the experience stays fast on every device. The CMS lets the team publish a new chapter as easily as a new bottle.",
@@ -265,7 +265,7 @@ export const PROJECTS: Project[] = [
       intro:
         "A collective of documentary filmmakers needed a name and a mark that could stand behind the work, never in front of it.",
       overview: [
-        "We named the studio for the way its members work—patient, observational, present. The identity is deliberately spare: a single typeface, a quiet mark, and a layout system built around the still frame.",
+        "We named the studio for the way its members work, patient, observational, present. The identity is deliberately spare: a single typeface, a quiet mark, and a layout system built around the still frame.",
         "Guidelines keep the brand consistent across festivals, titles, and press while leaving room for each film's own voice. Restraint is the point.",
       ],
       services: ["Naming", "Visual Identity", "Guidelines"],
@@ -283,12 +283,12 @@ export const PROJECTS: Project[] = [
     role: "Design system & build",
     summary: "A measured digital home for a lighting atelier.",
     description:
-      "A measured digital home for a lighting atelier—where catalogue, craft, and commerce share one calm grid. Designed so the products provide the only colour.",
+      "A measured digital home for a lighting atelier, where catalogue, craft, and commerce share one calm grid. Designed so the products provide the only colour.",
     tags: ["UX / UI", "Design System", "Development"],
     liveUrl: "#",
     detail: {
       intro:
-        "Lumen House design lighting as architecture. Their site needed the same precision—structural, generous, and quietly technical.",
+        "Lumen House design lighting as architecture. Their site needed the same precision, structural, generous, and quietly technical.",
       overview: [
         "We built a modular grid that carries everything from a single fixture to a full collection. Typography does the structural work; product imagery supplies the warmth. The result is a catalogue that feels like a considered space rather than a list.",
         "A lightweight design system keeps the team self-sufficient, with components that compose cleanly and never fight the content.",
@@ -315,7 +315,7 @@ export const PROJECTS: Project[] = [
         "Aperture represent photographers whose work needs room to breathe. The platform had to disappear and let the images carry the page.",
       overview: [
         "We designed a system of full-bleed frames and disciplined typography, with transitions that move between bodies of work like turning pages. The agency can sequence a story in minutes, and the site keeps pace on any connection.",
-        "Every motion decision serves the rhythm of looking—slow where it should be, instant where it must be.",
+        "Every motion decision serves the rhythm of looking, slow where it should be, instant where it must be.",
       ],
       services: ["Web Design", "Motion", "Development"],
       deliverables: ["Portfolio platform", "Motion system", "CMS"],
@@ -345,7 +345,7 @@ export const PROCESS: ProcessStep[] = [
     index: "01",
     title: "Listen",
     description:
-      "We begin in conversation—mapping ambitions, constraints, and the audience you are building for before a single mark is made.",
+      "We begin in conversation, mapping ambitions, constraints, and the audience you are building for before a single mark is made.",
   },
   {
     index: "02",
@@ -363,7 +363,7 @@ export const PROCESS: ProcessStep[] = [
     index: "04",
     title: "Deliver",
     description:
-      "We build, document, and hand over with care—so the work keeps its rigour long after we step away.",
+      "We build, document, and hand over with care, so the work keeps its rigour long after we step away.",
   },
 ];
 
@@ -388,17 +388,17 @@ export const CLIENTS = [
 export const ABOUT_APPROACH = {
   method: {
     title: "Working method",
-    body: "We keep the studio small and the work close. Every project is led end to end by the people who design and build it—no account layers, no hand-offs, no diluted intent. We work in tight loops, show early, and decide quickly, so momentum never becomes a casualty of process.",
+    body: "We keep the studio small and the work close. Every project is led end to end by the people who design and build it, no account layers, no hand-offs, no diluted intent. We work in tight loops, show early, and decide quickly, so momentum never becomes a casualty of process.",
   },
   stack: {
     title: "Technical foundation",
-    body: "We build on a modern, boring-on-purpose stack: Next.js and TypeScript for structure, Tailwind for a disciplined system, GSAP and Lenis for motion that serves the reading. Performance and accessibility are requirements, not afterthoughts—every build targets fast loads and clean, semantic markup.",
+    body: "We build on a modern, boring-on-purpose stack: Next.js and TypeScript for structure, Tailwind for a disciplined system, GSAP and Lenis for motion that serves the reading. Performance and accessibility are requirements, not afterthoughts, every build targets fast loads and clean, semantic markup.",
   },
 };
 
 export const ABOUT_BACKGROUND = [
   "Westbridge began as a two-person practice with a stubborn belief: that restraint is the clearest sign of a well-considered piece of work. A decade on, that conviction still sets the brief.",
-  "We have shaped brands and digital experiences for furniture houses, investment firms, vintners, and cultural collectives—work that tends to be quiet on the surface and exact underneath. We take on a deliberately small number of projects each year so each one keeps our full attention.",
+  "We have shaped brands and digital experiences for furniture houses, investment firms, vintners, and cultural collectives, work that tends to be quiet on the surface and exact underneath. We take on a deliberately small number of projects each year so each one keeps our full attention.",
 ];
 
 export type Collaborator = { name: string; role: string; note: string };
@@ -407,7 +407,7 @@ export const ABOUT_COLLABORATORS: Collaborator[] = [
   {
     name: "Studio team",
     role: "Design & front-end",
-    note: "The core of every project—strategy, design, and build under one roof.",
+    note: "The core of every project, strategy, design, and build under one roof.",
   },
   {
     name: "Partner network",
@@ -422,7 +422,7 @@ export const ABOUT_COLLABORATORS: Collaborator[] = [
 ];
 
 export const ABOUT_COLLAB_NOTE =
-  "We work alone on most projects. When a brief asks for a dimension beyond our core—heavier art direction, 3D, or specialist engineering—we assemble a small, hand-picked team rather than scaling for its own sake. The accountability stays with us.";
+  "We work alone on most projects. When a brief asks for a dimension beyond our core, heavier art direction, 3D, or specialist engineering, we assemble a small, hand-picked team rather than scaling for its own sake. The accountability stays with us.";
 
 export type CapabilityGroup = { title: string; items: string[] };
 
@@ -488,6 +488,6 @@ export const CONTACT_STEPS: ContactStep[] = [
     index: "04",
     title: "Delivery & follow-up",
     description:
-      "We launch, document, and hand over with care—then stay available for iteration as the work finds its feet.",
+      "We launch, document, and hand over with care, then stay available for iteration as the work finds its feet.",
   },
 ];

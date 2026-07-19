@@ -20,7 +20,7 @@ export default function Services() {
           className="self-end text-lg leading-relaxed text-ink-soft md:col-span-5 md:col-start-8"
         >
           We keep the studio small and the work close. Every engagement is led by
-          the people who do it—no layers, no hand-offs, no diluted intent.
+          the people who do it, no layers, no hand-offs, no diluted intent.
         </Reveal>
       </div>
 

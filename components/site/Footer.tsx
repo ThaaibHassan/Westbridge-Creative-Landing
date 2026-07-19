@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1400px] px-6 pt-20 md:px-10 md:pt-28">
         <div className="grid grid-cols-1 gap-12 border-b border-ink/15 pb-16 md:grid-cols-12">
           <div className="md:col-span-5">
-            <TransitionLink href="/" aria-label="Westbridge — home">
+            <TransitionLink href="/" aria-label="Westbridge | home">
               <Image
                 src="/logo-white.png"
                 alt="Westbridge Creative Studio"

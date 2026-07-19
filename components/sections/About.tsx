@@ -36,7 +36,7 @@ export default function About() {
             className="text-base leading-relaxed text-ink-soft md:col-span-4 md:col-start-8"
           >
             From first sketch to final deploy, the same people stay close to the
-            craft—so nothing is lost in translation between the idea and the
+            craft, so nothing is lost in translation between the idea and the
             artefact it becomes.
           </Reveal>
         </div>

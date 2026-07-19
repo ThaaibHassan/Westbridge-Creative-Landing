@@ -8,7 +8,7 @@ import { SERVICES, SERVICE_FAQ } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "What Westbridge offers — brand identity, digital experience, web design & build, and ongoing care. Scope, indicative pricing, and deliverables for each.",
+    "What Westbridge offers: brand identity, digital experience, web design & build, and ongoing care. Scope, indicative pricing, and deliverables for each.",
 };
 
 export default function ServicesPage() {

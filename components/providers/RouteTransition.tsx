@@ -45,7 +45,7 @@ export default function RouteTransition({ children }: { children: ReactNode }) {
     (href: string) => {
       if (animatingRef.current) return;
 
-      // External, mail, tel, or empty — let the browser handle it.
+      // External, mail, tel, or empty, let the browser handle it.
       if (
         !href ||
         href.startsWith("mailto:") ||
@@ -59,7 +59,7 @@ export default function RouteTransition({ children }: { children: ReactNode }) {
       const url = new URL(href, window.location.origin);
       const samePath = url.pathname === window.location.pathname;
 
-      // Same-page navigation (e.g. hash) — just scroll, no loader.
+      // Same-page navigation (e.g. hash), just scroll, no loader.
       if (samePath) {
         if (url.hash) {
           document

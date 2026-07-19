@@ -43,12 +43,12 @@ export default function ContactForm() {
     if (!validate()) return;
 
     const subject = encodeURIComponent(
-      `New enquiry — ${values.firstName} ${values.lastName}`,
+      `New enquiry: ${values.firstName} ${values.lastName}`,
     );
     const body = encodeURIComponent(
       `Name: ${values.firstName} ${values.lastName}\n` +
         `Email: ${values.email}\n` +
-        `Phone: ${values.phone || "—"}\n\n` +
+        `Phone: ${values.phone || "Not provided"}\n\n` +
         `${values.message}`,
     );
     window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
@@ -59,7 +59,7 @@ export default function ContactForm() {
     return (
       <div className="border-t border-ink/10 pt-10">
         <p className="text-display text-[clamp(1.75rem,4vw,3rem)]">
-          Thank you — your message is on its way.
+          Thank you. Your message is on its way.
         </p>
         <p className="mt-5 max-w-md text-ink-soft">
           We&apos;ll be in touch within two working days. If your mail client

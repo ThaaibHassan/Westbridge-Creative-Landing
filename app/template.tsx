@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 
 /**
  * App Router `template` remounts on every navigation, so this gives each page a
- * restrained enter animation—an understated fade and rise.
+ * restrained enter animation, an understated fade and rise.
  */
 export default function Template({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);

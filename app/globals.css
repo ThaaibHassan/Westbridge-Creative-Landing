@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ *
- * Westbridge Creative Studio — design tokens
- * Strict black & white editorial system — dark mode. Background is black,
- * type is white. Emphasis comes from scale, weight, and hairlines — never colour.
+ * Westbridge Creative Studio, design tokens
+ * Strict black & white editorial system, dark mode. Background is black,
+ * type is white. Emphasis comes from scale, weight, and hairlines, never colour.
  * ------------------------------------------------------------------ */
 @theme {
   --color-paper: #000000;
@@ -15,7 +15,7 @@
   --color-accent: #ffffff;
   --color-accent-soft: #cccccc;
 
-  /* Single, simple typeface — Inter — across the whole site. */
+  /* Single, simple typeface, Inter, across the whole site. */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
@@ -75,7 +75,7 @@
     display: block;
   }
 
-  /* Fluid display type — Inter, bold, tight tracking */
+  /* Fluid display type, Inter, bold, tight tracking */
   .text-display {
     font-family: var(--font-sans);
     font-weight: 700;
@@ -92,7 +92,7 @@
     color: var(--color-ink-soft);
   }
 
-  /* Hero — slow-shifting warm gradient bar below the wordmark */
+  /* Hero, slow-shifting warm gradient bar below the wordmark */
   .hero-gradient-bar {
     height: 5px;
     width: 100%;
