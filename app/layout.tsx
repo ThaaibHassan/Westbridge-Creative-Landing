@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/providers/SmoothScroll";
 import RouteTransition from "@/components/providers/RouteTransition";
 import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -57,6 +58,7 @@ export default function RootLayout({
             <Footer />
           </RouteTransition>
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
