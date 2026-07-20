@@ -9,6 +9,11 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { INTRO_SKIP_KEY } from "@/components/providers/IntroContext";
+import { refreshScrollTriggers } from "@/lib/motion";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type RouteTransitionContextValue = {
   navigate: (href: string) => void;
@@ -20,7 +25,6 @@ const RouteTransitionContext =
 export function useRouteTransition(): RouteTransitionContextValue {
   const ctx = useContext(RouteTransitionContext);
   if (!ctx) {
-    // Graceful fallback if used outside the provider.
     return {
       navigate: (href) => {
         window.location.href = href;
@@ -45,7 +49,6 @@ export default function RouteTransition({ children }: { children: ReactNode }) {
     (href: string) => {
       if (animatingRef.current) return;
 
-      // External, mail, tel, or empty, let the browser handle it.
       if (
         !href ||
         href.startsWith("mailto:") ||
@@ -59,7 +62,6 @@ export default function RouteTransition({ children }: { children: ReactNode }) {
       const url = new URL(href, window.location.origin);
       const samePath = url.pathname === window.location.pathname;
 
-      // Same-page navigation (e.g. hash), just scroll, no loader.
       if (samePath) {
         if (url.hash) {
           document
@@ -82,6 +84,14 @@ export default function RouteTransition({ children }: { children: ReactNode }) {
       animatingRef.current = true;
       overlay.style.pointerEvents = "auto";
 
+      if (window.location.pathname === "/") {
+        try {
+          sessionStorage.setItem(INTRO_SKIP_KEY, "1");
+        } catch {
+          /* ignore */
+        }
+      }
+
       const prefersReduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
@@ -96,6 +106,7 @@ export default function RouteTransition({ children }: { children: ReactNode }) {
           onComplete: () => {
             overlay.style.pointerEvents = "none";
             animatingRef.current = false;
+            refreshScrollTriggers();
           },
         });
       };
@@ -115,7 +126,11 @@ export default function RouteTransition({ children }: { children: ReactNode }) {
       counterEl.textContent = "0%";
 
       const tl = gsap.timeline({ onComplete: finish });
-      tl.to(line, { scaleX: 1, duration: FILL_DURATION, ease: "power1.inOut" }, 0).to(
+      tl.to(
+        line,
+        { scaleX: 1, duration: FILL_DURATION, ease: "power1.inOut" },
+        0,
+      ).to(
         progress,
         {
           v: 100,
@@ -135,7 +150,6 @@ export default function RouteTransition({ children }: { children: ReactNode }) {
     <RouteTransitionContext.Provider value={{ navigate }}>
       {children}
 
-      {/* Loading screen overlay */}
       <div
         ref={overlayRef}
         aria-hidden

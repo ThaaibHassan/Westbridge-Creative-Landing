@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
 import LineReveal from "@/components/motion/LineReveal";
 import TransitionLink from "@/components/site/TransitionLink";
@@ -27,6 +28,7 @@ export default function WorkPage() {
 
         <LineReveal
           as="h1"
+          waitForIntro={false}
           delay={0.2}
           className="text-display mt-8 text-[clamp(3rem,11vw,9rem)]"
           lines={["Selected", "work."]}
@@ -86,6 +88,17 @@ export default function WorkPage() {
                   <p className="mt-4 text-base text-ink-soft md:text-lg">
                     {project.role}
                   </p>
+                  {project.cover && (
+                    <div className="relative mt-8 aspect-[16/10] w-full max-w-xl overflow-hidden bg-paper-deep md:mt-10">
+                      <Image
+                        src={project.cover}
+                        alt=""
+                        fill
+                        sizes="(min-width: 768px) 40vw, 100vw"
+                        className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div className="md:col-span-4 md:col-start-9">

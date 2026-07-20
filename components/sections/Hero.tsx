@@ -5,136 +5,163 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import LineReveal from "@/components/motion/LineReveal";
+import ScrambleText, {
+  type ScrambleTextHandle,
+} from "@/components/motion/ScrambleText";
 import TransitionLink from "@/components/site/TransitionLink";
+import { useIntro } from "@/components/providers/IntroContext";
 import { SITE } from "@/lib/content";
+import { cn } from "@/lib/cn";
 
+/**
+ * Magazine-cover hero — masthead brand, folio meta,
+ * full-bleed plate, editorial deck + CTAs.
+ */
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const workScrambleRef = useRef<ScrambleTextHandle>(null);
+  const contactScrambleRef = useRef<ScrambleTextHandle>(null);
+  const { introReady, introActive } = useIntro();
 
   useGSAP(
     () => {
+      if (!introReady) return;
+
       const prefersReduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
       if (prefersReduced) return;
 
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from("[data-hero-media]", { opacity: 0, duration: 1.2 }, 0.1)
+      tl.from("[data-hero-media]", { scale: 1.06, opacity: 0, duration: 1.6 }, 0)
+        .from(
+          "[data-hero-folio]",
+          { y: 12, opacity: 0, duration: 0.8 },
+          0.35,
+        )
+        .from(
+          "[data-hero-deck]",
+          { y: 20, opacity: 0, duration: 1 },
+          0.55,
+        )
         .from(
           "[data-hero-cta] > *",
-          { y: 24, opacity: 0, duration: 1, stagger: 0.12 },
-          0.5,
-        )
-        .from(
-          "[data-hero-eyebrow]",
-          { y: 16, opacity: 0, duration: 0.9 },
-          0.8,
-        )
-        .from(
-          "[data-hero-gradient]",
-          { scaleX: 0, opacity: 0, duration: 1.1, transformOrigin: "left center" },
-          1,
+          { y: 18, opacity: 0, duration: 0.9, stagger: 0.1 },
+          0.7,
         );
     },
-    { scope: ref },
+    { scope: ref, dependencies: [introReady] },
   );
 
   return (
     <section
+      id="intro"
       ref={ref}
-      id="top"
-      className="relative flex h-svh min-h-0 flex-col overflow-hidden bg-paper pt-28 text-ink md:pt-32"
+      className="relative flex h-svh min-h-[640px] flex-col overflow-hidden bg-black text-ink"
     >
-      <div className="flex min-h-0 flex-1 flex-col px-6 md:px-10">
+      {/* Full-bleed plate */}
+      <div data-hero-media className="absolute inset-0">
+        <Image
+          src="/hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/35 to-black/85"
+        />
+      </div>
+
+      <div className="relative z-[1] flex min-h-0 flex-1 flex-col px-6 pt-28 md:px-10 md:pt-32">
         <div className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col">
-          {/* Upper region: media + actions */}
-          <div className="grid min-h-0 flex-1 grid-cols-1 gap-8 md:grid-cols-12">
-          {/* Left media panel, drop a real <Image> here later */}
+          {/* Folio row */}
           <div
-            data-hero-media
-            className="relative min-h-[38vh] overflow-hidden border border-white/10 bg-white/[0.03] md:col-span-5 md:min-h-0 lg:col-span-4"
+            data-hero-folio
+            className={cn(
+              "flex items-start justify-between gap-6 border-b border-white/20 pb-4",
+              introActive && "invisible",
+            )}
           >
-            {/*
-              Placeholder media. Replace with:
-              <Image src="/hero.jpg" alt="" fill priority sizes="(max-width:768px) 100vw, 40vw"
-                     className="object-cover grayscale" />
-            */}
-            <span className="absolute inset-0 flex items-center justify-center">
-              <Image
-                src="/logo-mark.png"
-                alt=""
-                width={180}
-                height={180}
-                unoptimized
-                className="h-28 w-28 object-contain opacity-[0.12] brightness-0 invert md:h-40 md:w-40"
-              />
-            </span>
-            <span className="absolute left-5 top-5 label text-ink/40">
-              Westbridge Studio
-            </span>
-            <span className="absolute bottom-5 left-5 label text-ink/40">
-              Est. 2014
-            </span>
+            <p className="label text-white/55">Vol. 01 — Studio</p>
+            <p className="label text-right text-white/55">{SITE.location}</p>
           </div>
 
-          {/* Right: actions + lead, bottom-aligned */}
-          <div className="flex flex-col justify-end md:col-span-6 md:col-start-7">
+          {/* Masthead — brand as cover title */}
+          <div className="mt-6 md:mt-8">
+            <LineReveal
+              as="h1"
+              delay={0.3}
+              stagger={0}
+              seamlessIntroHandoff
+              data-hero-wordmark
+              className={cn(
+                "text-display w-full max-w-full whitespace-nowrap font-bold leading-[0.82] tracking-[-0.045em] text-white",
+                "text-[clamp(2.75rem,calc((min(100vw,90rem)-5rem)/5.65),12rem)]",
+                // Keep in layout for FLIP measure; hide until intro hands off.
+                introActive && "invisible",
+              )}
+              lines={[<span key="wb">WESTBRIDGE</span>]}
+            />
             <div
-              data-hero-cta
-              className="flex flex-col items-start gap-8 md:items-end md:text-right"
+              className={cn(
+                "mt-4 flex flex-wrap items-baseline justify-between gap-3 border-t border-white/20 pt-4",
+                introActive && "invisible",
+              )}
             >
-              <div className="flex flex-wrap items-center gap-3">
+              <p className="text-sm tracking-tight text-white/60">
+                Creative Studio
+              </p>
+              <p className="font-serif text-sm text-white/45">Est. 2014</p>
+            </div>
+          </div>
+
+          {/* Spacer — image breathing room */}
+          <div className="min-h-0 flex-1" aria-hidden />
+
+          {/* Editorial deck + CTAs */}
+          <div className="shrink-0 pb-8 md:pb-10">
+            <div className="grid grid-cols-1 gap-8 border-t border-white/20 pt-6 md:grid-cols-12 md:items-end md:gap-10">
+              <p
+                data-hero-deck
+                className="max-w-md text-lg leading-relaxed text-white/75 md:col-span-5 md:text-xl"
+              >
+                {SITE.tagline}
+              </p>
+
+              <div
+                data-hero-cta
+                className="flex flex-wrap items-center gap-3 md:col-span-6 md:col-start-7 md:justify-end"
+              >
                 <TransitionLink
                   href="/work"
-                  className="group inline-flex items-center gap-3 rounded-full border border-white/30 px-7 py-3.5 text-sm font-medium tracking-tight transition-colors duration-500 hover:border-white/70"
+                  onMouseEnter={() => workScrambleRef.current?.play()}
+                  onFocus={() => workScrambleRef.current?.play()}
+                  className="group inline-flex items-center gap-3 rounded-full border border-white/35 bg-white/5 px-7 py-3.5 text-sm font-medium tracking-tight backdrop-blur-sm transition-colors duration-500 hover:border-white/70"
                 >
-                  See the work
+                  <ScrambleText ref={workScrambleRef} text="See the work" />
                   <span className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">
                     →
                   </span>
                 </TransitionLink>
                 <TransitionLink
                   href="/contact"
+                  onMouseEnter={() => contactScrambleRef.current?.play()}
+                  onFocus={() => contactScrambleRef.current?.play()}
                   className="group inline-flex items-center gap-3 rounded-full bg-ink px-7 py-3.5 text-sm font-medium tracking-tight text-paper transition-opacity duration-500 hover:opacity-90"
                 >
-                  Contact
+                  <ScrambleText ref={contactScrambleRef} text="Contact" />
                   <span className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">
                     ↗
                   </span>
                 </TransitionLink>
               </div>
-              <p className="max-w-sm text-base leading-relaxed text-ink/60 md:text-lg">
-                {SITE.tagline}
-              </p>
             </div>
           </div>
         </div>
-
-        {/* Bottom: oversized wordmark, pinned above the gradient strip */}
-        <div className="mt-auto w-full shrink-0 pb-6 md:pb-8">
-          <span
-            data-hero-eyebrow
-            className="mb-3 block text-base italic text-ink/45 md:mb-4 md:text-lg"
-          >
-            independent creative studio
-          </span>
-          <LineReveal
-            as="h1"
-            delay={0.35}
-            stagger={0}
-            className="text-display w-full max-w-full whitespace-nowrap font-bold leading-[0.85] tracking-[-0.045em] text-[clamp(2.75rem,calc((100vw-3rem)/5.65),12.5rem)] md:text-[clamp(3rem,calc((min(100vw,90rem)-5rem)/5.65),13.5rem)]"
-            lines={[<span key="wb">WESTBRIDGE</span>]}
-          />
-        </div>
-        </div>
       </div>
-
-      {/* Full-width gradient, flush with bottom of viewport */}
-      <span
-        data-hero-gradient
-        aria-hidden
-        className="hero-gradient-bar w-full shrink-0"
-      />
     </section>
   );
 }

@@ -2,8 +2,12 @@
 
 import { useRef, type ElementType, type ReactNode } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { cn } from "@/lib/cn";
+import { useIntro } from "@/components/providers/IntroContext";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type RevealProps = {
   children: ReactNode;
@@ -32,11 +36,12 @@ export default function Reveal({
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const Tag = (as ?? "div") as ElementType;
+  const { introReady } = useIntro();
 
   useGSAP(
     () => {
       const root = ref.current;
-      if (!root) return;
+      if (!root || !introReady) return;
 
       const prefersReduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
@@ -52,7 +57,8 @@ export default function Reveal({
       }
 
       gsap.set(targets, { opacity: 0, y });
-      gsap.to(targets, {
+
+      const tween = gsap.to(targets, {
         opacity: 1,
         y: 0,
         duration: 1,
@@ -63,10 +69,18 @@ export default function Reveal({
           trigger: root,
           start: "top 85%",
           once: true,
+          invalidateOnRefresh: true,
         },
       });
+
+      return () => {
+        tween.kill();
+        ScrollTrigger.getAll().forEach((st) => {
+          if (st.trigger === root) st.kill();
+        });
+      };
     },
-    { scope: ref },
+    { scope: ref, dependencies: [introReady, delay, y, stagger, staggerAmount] },
   );
 
   return (

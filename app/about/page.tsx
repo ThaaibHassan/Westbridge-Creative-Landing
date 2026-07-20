@@ -56,6 +56,7 @@ export default function AboutPage() {
         </Reveal>
         <LineReveal
           as="h1"
+          waitForIntro={false}
           delay={0.2}
           className="text-display mt-8 text-[clamp(2.5rem,9vw,8rem)]"
           lines={["A studio", "made for", "fewer things."]}

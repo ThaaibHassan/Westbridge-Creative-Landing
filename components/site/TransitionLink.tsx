@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { MouseEvent, ReactNode } from "react";
+import type { ComponentProps, MouseEvent, ReactNode } from "react";
 import { useRouteTransition } from "@/components/providers/RouteTransition";
 
 type TransitionLinkProps = {
@@ -9,9 +9,7 @@ type TransitionLinkProps = {
   children: ReactNode;
   className?: string;
   onClick?: (e: MouseEvent<HTMLAnchorElement>) => void;
-  "data-menu-item"?: boolean;
-  "aria-label"?: string;
-};
+} & Omit<ComponentProps<typeof Link>, "href" | "onClick" | "children">;
 
 /**
  * Internal link that plays the route-transition loading screen before
