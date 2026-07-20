@@ -1,8 +1,8 @@
 export const SITE = {
   name: "Westbridge",
   fullName: "Westbridge Creative Studio",
-  location: "London, New York",
-  email: "studio@westbridge.studio",
+  location: "Maldives, London, New York",
+  email: "studio@westbridgecreative.com",
   availability: "Booking selected projects for 2026",
   responseTime: "Replies within two working days",
   tagline:
@@ -14,7 +14,7 @@ export const NAV_LINKS = [
   { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Journal", href: "/journal" },
 ];
 
 export type Service = {
@@ -164,6 +164,10 @@ export type Project = {
   description: string;
   tags: string[];
   liveUrl?: string;
+  /** Home work preview + case-study hero. Drop files in /public/work/. */
+  cover?: string;
+  /** Optional secondary frames for the case-study gallery. */
+  gallery?: string[];
   /** Case-study detail content. */
   detail: {
     intro: string;
@@ -187,6 +191,8 @@ export const PROJECTS: Project[] = [
     description:
       "A Scandinavian furniture house, rebuilt around quiet confidence and an obsession with material honesty. A flexible wordmark, a restrained palette, and an art-direction system that lets the objects speak.",
     tags: ["Strategy", "Identity", "Art Direction"],
+    cover: "/work/atelier-norden.jpg",
+    gallery: ["/work/atelier-norden.jpg", "/work/gallery/atelier-2.jpg"],
     detail: {
       intro:
         "Norden makes furniture meant to outlast trends. The identity had to feel as considered as the joinery, warm, exact, and unhurried.",
@@ -212,6 +218,8 @@ export const PROJECTS: Project[] = [
       "A private investment platform where restraint signals trust, and every interaction earns its place. A design system tuned for clarity, density, and calm under pressure.",
     tags: ["Product", "UX / UI", "Design System"],
     liveUrl: "#",
+    cover: "/work/meridian-capital.jpg",
+    gallery: ["/work/meridian-capital.jpg", "/work/gallery/meridian-2.jpg"],
     detail: {
       intro:
         "Meridian manages serious capital for a small number of families. The product had to feel inevitable, precise, legible, and entirely without noise.",
@@ -237,6 +245,8 @@ export const PROJECTS: Project[] = [
       "An editorial commerce experience for a boutique vintner, part magazine, part shop, fully composed. Long-form storytelling that flows into a frictionless checkout.",
     tags: ["Web Design", "Motion", "Development"],
     liveUrl: "#",
+    cover: "/work/cobalt-and-vine.jpg",
+    gallery: ["/work/cobalt-and-vine.jpg", "/work/gallery/cobalt-2.jpg"],
     detail: {
       intro:
         "Cobalt & Vine sell a small, fiercely curated list. The site needed to read like a magazine and convert like a shop, without the seams showing.",
@@ -261,6 +271,8 @@ export const PROJECTS: Project[] = [
     description:
       "Naming and identity for a documentary collective, tuned for the long form and the unhurried frame. An identity that recedes so the films can speak.",
     tags: ["Naming", "Identity", "Guidelines"],
+    cover: "/work/field-notes-studio.jpg",
+    gallery: ["/work/field-notes-studio.jpg", "/work/gallery/field-2.jpg"],
     detail: {
       intro:
         "A collective of documentary filmmakers needed a name and a mark that could stand behind the work, never in front of it.",
@@ -286,6 +298,8 @@ export const PROJECTS: Project[] = [
       "A measured digital home for a lighting atelier, where catalogue, craft, and commerce share one calm grid. Designed so the products provide the only colour.",
     tags: ["UX / UI", "Design System", "Development"],
     liveUrl: "#",
+    cover: "/work/lumen-house.jpg",
+    gallery: ["/work/lumen-house.jpg", "/work/gallery/lumen-2.jpg"],
     detail: {
       intro:
         "Lumen House design lighting as architecture. Their site needed the same precision, structural, generous, and quietly technical.",
@@ -310,6 +324,8 @@ export const PROJECTS: Project[] = [
     description:
       "A portfolio platform for a photography agency, composed around the image and the white space that frames it. Fast, full-bleed, and entirely out of the way.",
     tags: ["Web Design", "Motion", "Development"],
+    cover: "/work/aperture.jpg",
+    gallery: ["/work/aperture.jpg", "/work/gallery/aperture-2.jpg"],
     detail: {
       intro:
         "Aperture represent photographers whose work needs room to breathe. The platform had to disappear and let the images carry the page.",

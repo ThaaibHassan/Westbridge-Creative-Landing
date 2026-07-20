@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
 import WordReveal from "@/components/motion/WordReveal";
 import Marquee from "@/components/motion/Marquee";
@@ -16,11 +17,28 @@ export default function About() {
           <span className="label">The studio</span>
         </div>
 
-        <WordReveal
-          as="p"
-          text="We are a compact team of designers and developers who believe restraint is a discipline. We make fewer things, more carefully."
-          className="text-display mt-10 max-w-5xl text-[clamp(1.75rem,4.2vw,3.5rem)] leading-[1.05]"
-        />
+        <div className="mt-10 grid grid-cols-1 items-end gap-12 md:mt-14 md:grid-cols-12 md:gap-10">
+          <WordReveal
+            as="p"
+            text="We are a compact team of designers and developers who believe restraint is a discipline. We make fewer things, more carefully."
+            className="text-display max-w-5xl text-[clamp(1.75rem,4.2vw,3.5rem)] leading-[1.05] md:col-span-7"
+          />
+
+          <Reveal className="md:col-span-5">
+            <div className="relative aspect-[4/5] w-full overflow-hidden md:ml-auto md:max-w-md">
+              <Image
+                src="/studio/about.jpg"
+                alt=""
+                fill
+                sizes="(min-width: 768px) 35vw, 100vw"
+                className="object-cover"
+              />
+              <span className="absolute bottom-4 left-4 label text-white/65">
+                Westbridge studio
+              </span>
+            </div>
+          </Reveal>
+        </div>
 
         <div className="mt-16 grid grid-cols-1 gap-10 md:mt-24 md:grid-cols-12">
           <Reveal
@@ -56,7 +74,6 @@ export default function About() {
           </TransitionLink>
         </Reveal>
 
-        {/* Stats */}
         <Reveal
           stagger
           className="mt-20 grid grid-cols-2 gap-y-10 border-t border-ink/10 pt-12 md:mt-28 md:grid-cols-4"
@@ -72,11 +89,8 @@ export default function About() {
         </Reveal>
       </div>
 
-      {/* Clients marquee */}
       <div className="mt-20 border-t border-ink/10 pt-12 md:mt-28">
-        <span className="label mb-8 block px-6 md:px-10">
-          Trusted by
-        </span>
+        <span className="label mb-8 block px-6 md:px-10">Trusted by</span>
         <Marquee items={CLIENTS} />
       </div>
     </section>

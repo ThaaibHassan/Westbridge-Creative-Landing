@@ -6,14 +6,47 @@ import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import TransitionLink from "@/components/site/TransitionLink";
+import ScrambleText, {
+  type ScrambleTextHandle,
+} from "@/components/motion/ScrambleText";
 import { NAV_LINKS, SITE } from "@/lib/content";
 import { cn } from "@/lib/cn";
+
+function NavItem({
+  href,
+  label,
+  active,
+}: {
+  href: string;
+  label: string;
+  active: boolean;
+}) {
+  const scrambleRef = useRef<ScrambleTextHandle>(null);
+
+  return (
+    <TransitionLink
+      href={href}
+      onMouseEnter={() => scrambleRef.current?.play()}
+      onFocus={() => scrambleRef.current?.play()}
+      className="group relative text-sm tracking-tight text-ink-soft transition-colors hover:text-ink"
+    >
+      <ScrambleText ref={scrambleRef} text={label} />
+      <span
+        className={cn(
+          "absolute -bottom-1 left-0 h-px bg-current transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          active ? "w-full" : "w-0 group-hover:w-full",
+        )}
+      />
+    </TransitionLink>
+  );
+}
 
 export default function Nav() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const ctaScrambleRef = useRef<ScrambleTextHandle>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -79,7 +112,7 @@ export default function Nav() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+        "nav-shell fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
         scrolled ? "bg-paper/80 py-4 backdrop-blur-md" : "bg-transparent py-6",
         "text-ink",
       )}
@@ -91,13 +124,14 @@ export default function Nav() {
           aria-label="Westbridge | home"
         >
           <Image
-            src="/logo-white.png"
+            src="/logo-icon.png"
             alt="Westbridge Creative Studio"
-            width={260}
-            height={60}
+            width={306}
+            height={306}
             priority
             unoptimized
-            className="h-5 w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03] md:h-6"
+            data-nav-logo
+            className="h-7 w-7 object-contain brightness-0 invert transition-[filter,transform] duration-500 group-hover:scale-[1.03] md:h-8 md:w-8"
           />
         </TransitionLink>
 
@@ -108,29 +142,24 @@ export default function Nav() {
                 ? pathname === "/"
                 : pathname.startsWith(link.href);
             return (
-              <TransitionLink
+              <NavItem
                 key={link.href}
                 href={link.href}
-                className="group relative text-sm tracking-tight text-ink-soft transition-colors hover:text-ink"
-              >
-                {link.label}
-                <span
-                  className={cn(
-                    "absolute -bottom-1 left-0 h-px bg-current transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-                    active ? "w-full" : "w-0 group-hover:w-full",
-                  )}
-                />
-              </TransitionLink>
+                label={link.label}
+                active={active}
+              />
             );
           })}
         </nav>
 
         <TransitionLink
           href="/contact"
+          onMouseEnter={() => ctaScrambleRef.current?.play()}
+          onFocus={() => ctaScrambleRef.current?.play()}
           className="hidden text-sm tracking-tight md:inline-flex md:items-center md:gap-2"
         >
           <span className="relative">
-            Start a project
+            <ScrambleText ref={ctaScrambleRef} text="Start a project" />
             <span className="absolute -bottom-1 left-0 h-px w-full bg-current" />
           </span>
         </TransitionLink>

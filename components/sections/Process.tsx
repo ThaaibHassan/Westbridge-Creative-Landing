@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
 import SectionHeading from "@/components/site/SectionHeading";
 import { PROCESS } from "@/lib/content";
@@ -22,10 +23,37 @@ export default function Process() {
               Four movements, repeated with discipline. The rhythm stays the
               same; the work it produces never does.
             </Reveal>
+
+            <Reveal className="mt-10 hidden md:block">
+              <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden">
+                <Image
+                  src="/studio/process.jpg"
+                  alt=""
+                  fill
+                  sizes="(min-width: 768px) 30vw, 100vw"
+                  className="object-cover"
+                />
+                <span className="absolute bottom-4 left-4 label text-white/65">
+                  Working method
+                </span>
+              </div>
+            </Reveal>
           </div>
         </div>
 
         <div className="md:col-span-6 md:col-start-7">
+          <Reveal className="mb-10 md:hidden">
+            <div className="relative aspect-[16/10] w-full overflow-hidden">
+              <Image
+                src="/studio/process.jpg"
+                alt=""
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+
           {PROCESS.map((step) => (
             <Reveal key={step.index}>
               <article className="grid grid-cols-[auto_1fr] gap-6 border-t border-ink/10 py-10 first:border-t-0 first:pt-0 md:gap-10 md:py-14">

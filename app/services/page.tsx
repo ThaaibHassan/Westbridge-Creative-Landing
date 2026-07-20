@@ -24,6 +24,7 @@ export default function ServicesPage() {
         </Reveal>
         <LineReveal
           as="h1"
+          waitForIntro={false}
           delay={0.2}
           className="text-display mt-8 text-[clamp(3rem,11vw,9rem)]"
           lines={["What we", "offer."]}
@@ -115,6 +116,8 @@ export default function ServicesPage() {
             </Reveal>
             <LineReveal
               as="h2"
+              waitForIntro={false}
+              scroll
               delay={0.15}
               className="text-display mt-6 text-[clamp(2rem,4vw,3rem)]"
               lines={["Common", "questions."]}

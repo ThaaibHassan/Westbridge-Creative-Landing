@@ -18,6 +18,8 @@ export default function Contact() {
 
       <LineReveal
         as="h2"
+        scroll
+        waitForIntro={false}
         className="text-display mt-10 text-[clamp(2.5rem,9vw,8rem)]"
         lines={[
           "Let’s make",

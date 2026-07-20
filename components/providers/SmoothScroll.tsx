@@ -8,6 +8,12 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+declare global {
+  interface Window {
+    __lenis?: Lenis;
+  }
+}
+
 export default function SmoothScroll({
   children,
 }: {
@@ -30,6 +36,29 @@ export default function SmoothScroll({
       touchMultiplier: 1.4,
     });
 
+    window.__lenis = lenis;
+
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value?: number) {
+        if (value !== undefined) {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return lenis.scroll;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+    });
+
+    const onRefresh = () => lenis.resize();
+    ScrollTrigger.addEventListener("refresh", onRefresh);
+
+    // Keep ScrollTrigger in sync with Lenis (needed for pinned scrub sections).
     lenis.on("scroll", ScrollTrigger.update);
 
     const raf = (time: number) => {
@@ -38,7 +67,6 @@ export default function SmoothScroll({
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
-    // Allow anchor links to use Lenis
     const handleAnchor = (event: MouseEvent) => {
       const target = (event.target as HTMLElement)?.closest(
         'a[href^="#"]',
@@ -53,12 +81,14 @@ export default function SmoothScroll({
     };
     document.addEventListener("click", handleAnchor);
 
-    ScrollTrigger.refresh();
+    requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => {
       document.removeEventListener("click", handleAnchor);
+      ScrollTrigger.removeEventListener("refresh", onRefresh);
       gsap.ticker.remove(raf);
       lenis.destroy();
+      if (window.__lenis === lenis) delete window.__lenis;
     };
   }, []);
 

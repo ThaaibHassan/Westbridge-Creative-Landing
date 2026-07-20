@@ -91,33 +91,6 @@
     font-weight: 500;
     color: var(--color-ink-soft);
   }
-
-  /* Hero, slow-shifting warm gradient bar below the wordmark */
-  .hero-gradient-bar {
-    height: 5px;
-    width: 100%;
-    background: linear-gradient(
-      90deg,
-      #0d7a8c 0%,
-      #1fa896 16%,
-      #3ecf9a 30%,
-      #f07840 48%,
-      #ff9f43 62%,
-      #e85d24 78%,
-      #c2410c 100%
-    );
-    background-size: 220% 100%;
-    animation: hero-gradient-shift 10s ease-in-out infinite alternate;
-  }
-}
-
-@keyframes hero-gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
 }
 
 /* Respect users who prefer reduced motion */
