@@ -53,6 +53,15 @@ export default function SmoothScroll({
           height: window.innerHeight,
         };
       },
+      // Prefer transform pins when an ancestor is transformed (Lenis / GSAP).
+      pinType: document.documentElement.style.transform
+        ? "transform"
+        : "fixed",
+    });
+
+    // Keep ScrollTrigger aligned with Lenis scroll after layout.
+    ScrollTrigger.defaults({
+      scroller: document.documentElement,
     });
 
     const onRefresh = () => lenis.resize();

@@ -9,7 +9,7 @@ export default function About() {
   return (
     <section
       id="studio"
-      className="border-y border-ink/10 bg-paper-deep/60 py-24 md:py-36"
+      className="border-y border-ink/10 bg-paper-deep/60 py-20 md:py-28"
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <div className="flex items-center gap-4">

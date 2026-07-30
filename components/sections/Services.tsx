@@ -1,14 +1,15 @@
 import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
 import SectionHeading from "@/components/site/SectionHeading";
+import TextLift from "@/components/motion/TextLift";
 import TransitionLink from "@/components/site/TransitionLink";
 import { SERVICES } from "@/lib/content";
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 md:py-36">
+    <section id="services" className="py-20 md:py-28">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
           <SectionHeading
             className="md:col-span-5"
             label="What we do"
@@ -19,14 +20,13 @@ export default function Services() {
             className="self-end text-lg leading-relaxed text-ink-soft md:col-span-5 md:col-start-8"
           >
             We keep the studio small and the work close. Every engagement is led
-            by the people who do it, no layers, no hand-offs, no diluted intent.
+            by the people who do it — no layers, no hand-offs, no diluted intent.
           </Reveal>
         </div>
       </div>
 
-      {/* Atmosphere plate */}
-      <Reveal className="mx-auto mt-16 max-w-[1400px] px-6 md:mt-20 md:px-10">
-        <div className="relative aspect-[16/9] w-full overflow-hidden md:aspect-[21/9]">
+      <Reveal className="mx-auto mt-12 max-w-[1400px] px-6 md:mt-14 md:px-10">
+        <div className="relative aspect-[16/9] w-full overflow-hidden md:aspect-[2.4/1]">
           <Image
             src="/studio/services.jpg"
             alt=""
@@ -44,7 +44,7 @@ export default function Services() {
         </div>
       </Reveal>
 
-      <div className="mx-auto mt-16 max-w-[1400px] px-6 md:mt-20 md:px-10">
+      <div className="mx-auto mt-12 max-w-[1400px] px-6 md:mt-14 md:px-10">
         <div className="border-t border-ink/10">
           {SERVICES.map((service) => (
             <Reveal key={service.index}>
@@ -56,8 +56,8 @@ export default function Services() {
                   <span className="font-serif text-sm text-ink-muted">
                     ({service.index})
                   </span>
-                  <h3 className="text-display text-[clamp(1.75rem,3.5vw,2.75rem)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:group-hover:translate-x-3">
-                    {service.title}
+                  <h3 className="text-display text-[clamp(1.75rem,3.5vw,2.75rem)]">
+                    <TextLift>{service.title}</TextLift>
                   </h3>
                 </div>
 

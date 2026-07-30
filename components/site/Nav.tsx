@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import TransitionLink from "@/components/site/TransitionLink";
+import TextLift from "@/components/motion/TextLift";
 import ScrambleText, {
   type ScrambleTextHandle,
 } from "@/components/motion/ScrambleText";
@@ -21,16 +22,12 @@ function NavItem({
   label: string;
   active: boolean;
 }) {
-  const scrambleRef = useRef<ScrambleTextHandle>(null);
-
   return (
     <TransitionLink
       href={href}
-      onMouseEnter={() => scrambleRef.current?.play()}
-      onFocus={() => scrambleRef.current?.play()}
       className="group relative text-sm tracking-tight text-ink-soft transition-colors hover:text-ink"
     >
-      <ScrambleText ref={scrambleRef} text={label} />
+      <TextLift>{label}</TextLift>
       <span
         className={cn(
           "absolute -bottom-1 left-0 h-px bg-current transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
@@ -156,12 +153,9 @@ export default function Nav() {
           href="/contact"
           onMouseEnter={() => ctaScrambleRef.current?.play()}
           onFocus={() => ctaScrambleRef.current?.play()}
-          className="hidden text-sm tracking-tight md:inline-flex md:items-center md:gap-2"
+          className="hidden border border-ink/30 px-4 py-2 text-sm tracking-tight transition-colors hover:border-ink/60 md:inline-flex md:items-center md:gap-2"
         >
-          <span className="relative">
-            <ScrambleText ref={ctaScrambleRef} text="Start a project" />
-            <span className="absolute -bottom-1 left-0 h-px w-full bg-current" />
-          </span>
+          <ScrambleText ref={ctaScrambleRef} text="Start a project" />
         </TransitionLink>
 
         <button

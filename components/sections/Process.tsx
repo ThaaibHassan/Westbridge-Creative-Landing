@@ -7,7 +7,7 @@ export default function Process() {
   return (
     <section
       id="process"
-      className="mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-36"
+      className="mx-auto max-w-[1400px] px-6 py-20 md:px-10 md:py-28"
     >
       <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-5">

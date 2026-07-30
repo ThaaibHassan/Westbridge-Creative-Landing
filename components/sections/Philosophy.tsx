@@ -1,14 +1,15 @@
 import Reveal from "@/components/motion/Reveal";
 import WordReveal from "@/components/motion/WordReveal";
+import TextLift from "@/components/motion/TextLift";
 
 /**
- * Studio manifesto — Lucas-style restraint as craft, not decoration.
+ * Studio manifesto — Lucas restraint. WordReveal keeps scroll calm.
  */
 export default function Philosophy() {
   return (
     <section
       id="philosophy"
-      className="mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-36"
+      className="mx-auto max-w-[1400px] px-6 py-20 md:px-10 md:py-28"
     >
       <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-5">
@@ -73,7 +74,7 @@ export default function Philosophy() {
                     {item.marker}
                   </p>
                   <p className="mt-2 text-sm font-medium tracking-tight text-ink">
-                    {item.title}
+                    <TextLift>{item.title}</TextLift>
                   </p>
                   <p className="mt-1 text-sm leading-relaxed text-ink-soft">
                     {item.body}
