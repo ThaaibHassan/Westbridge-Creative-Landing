@@ -1,16 +1,17 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+/** Flip to false (and redeploy) when the public site should go live again. */
+const MAINTENANCE_MODE = true;
+
 /**
- * When MAINTENANCE_MODE=1, the public site returns an offline page.
- * Unset / set to 0 on Vercel to restore access.
+ * When enabled, the public site returns an offline page.
  */
 export function middleware(request: NextRequest) {
-  if (process.env.MAINTENANCE_MODE !== "1") {
+  if (!MAINTENANCE_MODE) {
     return NextResponse.next();
   }
 
-  // Allow Next internals and static assets so the offline page can load
   const { pathname } = request.nextUrl;
   if (
     pathname.startsWith("/_next") ||
