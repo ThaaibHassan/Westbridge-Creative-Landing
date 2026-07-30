@@ -6,6 +6,7 @@ import { cn } from "@/lib/cn";
 
 type FieldKey = "firstName" | "lastName" | "email" | "phone" | "message";
 type Errors = Partial<Record<Exclude<FieldKey, "phone">, string>>;
+type Status = "idle" | "sending" | "sent";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -18,7 +19,7 @@ export default function ContactForm() {
     message: "",
   });
   const [errors, setErrors] = useState<Errors>({});
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
 
   const update =
     (key: FieldKey) =>
@@ -42,6 +43,8 @@ export default function ContactForm() {
     e.preventDefault();
     if (!validate()) return;
 
+    setStatus("sending");
+
     const subject = encodeURIComponent(
       `New enquiry: ${values.firstName} ${values.lastName}`,
     );
@@ -51,14 +54,18 @@ export default function ContactForm() {
         `Phone: ${values.phone || "Not provided"}\n\n` +
         `${values.message}`,
     );
-    window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+
+    window.setTimeout(() => {
+      window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
+      setStatus("sent");
+    }, 650);
   };
 
-  if (submitted) {
+  if (status === "sent") {
     return (
       <div className="border-t border-ink/10 pt-10">
-        <p className="text-display text-[clamp(1.75rem,4vw,3rem)]">
+        <p className="label text-ink-muted">Sent</p>
+        <p className="text-display mt-4 text-[clamp(1.75rem,4vw,3rem)]">
           Thank you. Your message is on its way.
         </p>
         <p className="mt-5 max-w-md text-ink-soft">
@@ -75,7 +82,7 @@ export default function ContactForm() {
         <button
           type="button"
           onClick={() => {
-            setSubmitted(false);
+            setStatus("idle");
             setValues({
               firstName: "",
               lastName: "",
@@ -84,7 +91,7 @@ export default function ContactForm() {
               message: "",
             });
           }}
-          className="mt-8 text-sm tracking-tight text-ink-soft underline underline-offset-4 transition-colors hover:text-ink"
+          className="mt-8 border border-ink/25 px-5 py-2.5 text-sm tracking-tight text-ink-soft transition-colors hover:border-ink/50 hover:text-ink"
         >
           Send another message
         </button>
@@ -153,12 +160,15 @@ export default function ContactForm() {
         </p>
         <button
           type="submit"
-          className="group inline-flex items-center justify-center gap-3 rounded-full bg-ink px-8 py-4 text-sm font-medium text-paper transition-opacity duration-500 hover:opacity-90"
+          disabled={status === "sending"}
+          className="group inline-flex min-w-[10rem] items-center justify-center gap-3 bg-ink px-8 py-4 text-sm font-medium text-paper transition-opacity duration-500 hover:opacity-90 disabled:opacity-70"
         >
-          Send message
-          <span className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">
-            ↗
-          </span>
+          {status === "sending" ? "Sending…" : "Send message"}
+          {status === "idle" && (
+            <span className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">
+              ↗
+            </span>
+          )}
         </button>
       </div>
     </form>

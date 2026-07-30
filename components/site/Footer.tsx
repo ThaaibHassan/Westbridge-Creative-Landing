@@ -71,11 +71,28 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Oversized wordmark */}
-      <div aria-hidden className="pointer-events-none select-none px-6 md:px-10">
-        <span className="text-display block translate-y-[18%] text-[18vw] font-medium leading-none text-ink/[0.06]">
-          WESTBRIDGE
-        </span>
+      {/* Oversized wordmark — full-width, flush to bottom */}
+      <div aria-hidden className="pointer-events-none w-full select-none leading-none">
+        <svg
+          viewBox="0 0 1000 115"
+          className="block h-auto w-full"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <text
+            x="0"
+            y="115"
+            textLength="1000"
+            lengthAdjust="spacingAndGlyphs"
+            className="fill-ink/[0.06]"
+            style={{
+              fontFamily: "var(--font-sans), ui-sans-serif, system-ui, sans-serif",
+              fontSize: 155,
+              fontWeight: 700,
+            }}
+          >
+            WESTBRIDGE
+          </text>
+        </svg>
       </div>
     </footer>
   );

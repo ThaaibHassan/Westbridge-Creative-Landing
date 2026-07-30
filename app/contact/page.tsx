@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/motion/Reveal";
-import LineReveal from "@/components/motion/LineReveal";
+import CopyEmail from "@/components/motion/CopyEmail";
+import PageHeader from "@/components/site/PageHeader";
 import ContactForm from "@/components/site/ContactForm";
 import {
   CONTACT_DETAILS,
   CONTACT_HELP,
   CONTACT_STEPS,
+  SITE,
 } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -41,30 +43,14 @@ function NumberedSection({
 export default function ContactPage() {
   return (
     <main id="top" className="px-6 pt-32 md:px-10 md:pt-44">
-      {/* Header */}
-      <header className="mx-auto max-w-[1400px] pb-12 md:pb-16">
-        <Reveal>
-          <div className="flex items-center gap-4">
-            <span className="h-px w-8 bg-ink" />
-            <span className="label">Contact</span>
-          </div>
-        </Reveal>
-        <LineReveal
-          as="h1"
-          delay={0.2}
-          className="text-display mt-8 text-[clamp(2.5rem,9vw,8rem)]"
-          lines={["Tell us what", "you're making."]}
-        />
-        <Reveal
-          as="p"
-          className="mt-10 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl"
-        >
-          A few lines is plenty to start. We read every message ourselves and
-          reply within two working days.
-        </Reveal>
-      </header>
+      <PageHeader
+        label="Contact"
+        lines={["Tell us what", "you're making."]}
+        deck="A few lines is plenty to start. We read every message ourselves and reply within two working days."
+        className="border-b-0 pb-0 md:pb-0"
+        meta={<CopyEmail email={SITE.email} className="md:items-end" />}
+      />
 
-      {/* C.01 Details */}
       <NumberedSection marker="C.01" title="Details">
         <div className="grid grid-cols-1 gap-px border-t border-ink/10 sm:grid-cols-2">
           {CONTACT_DETAILS.map((d) => (
@@ -87,14 +73,12 @@ export default function ContactPage() {
         </div>
       </NumberedSection>
 
-      {/* C.02 Inquiry */}
       <NumberedSection marker="C.02" title="Inquiry">
         <Reveal>
           <ContactForm />
         </Reveal>
       </NumberedSection>
 
-      {/* C.03 What we help with */}
       <NumberedSection marker="C.03" title="What we help with">
         <ul className="grid grid-cols-1 gap-px border-t border-ink/10 sm:grid-cols-2">
           {CONTACT_HELP.map((item) => (
@@ -107,7 +91,6 @@ export default function ContactPage() {
         </ul>
       </NumberedSection>
 
-      {/* C.04 How it works */}
       <NumberedSection marker="C.04" title="How it works">
         <div className="border-t border-ink/10">
           {CONTACT_STEPS.map((step) => (

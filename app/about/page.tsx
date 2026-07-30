@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/motion/Reveal";
-import LineReveal from "@/components/motion/LineReveal";
+import Magnetic from "@/components/motion/Magnetic";
+import PageHeader from "@/components/site/PageHeader";
 import TransitionLink from "@/components/site/TransitionLink";
 import {
   ABOUT_APPROACH,
@@ -46,30 +47,14 @@ function SectionShell({
 export default function AboutPage() {
   return (
     <main id="top" className="px-6 pt-32 md:px-10 md:pt-44">
-      {/* Header */}
-      <header className="mx-auto max-w-[1400px] pb-12 md:pb-16">
-        <Reveal>
-          <div className="flex items-center gap-4">
-            <span className="h-px w-8 bg-ink" />
-            <span className="label">About</span>
-          </div>
-        </Reveal>
-        <LineReveal
-          as="h1"
-          delay={0.2}
-          className="text-display mt-8 text-[clamp(2.5rem,9vw,8rem)]"
-          lines={["A studio", "made for", "fewer things."]}
-        />
-        <Reveal
-          as="p"
-          className="mt-10 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl"
-        >
-          We are a compact team of designers and developers who believe restraint
-          is a discipline. Here is how we work, where we come from, and what we can
-          do.
-        </Reveal>
+      <PageHeader
+        label="About"
+        lines={["A studio", "made for", "fewer things."]}
+        deck="We are a compact team of designers and developers who believe restraint is a discipline. Here is how we work, where we come from, and what we can do."
+        className="border-b-0 pb-0 md:pb-0"
+      />
 
-        {/* Stats */}
+      <div className="mx-auto max-w-[1400px]">
         <Reveal
           stagger
           className="mt-16 grid grid-cols-2 gap-y-10 border-t border-ink/10 pt-12 md:mt-20 md:grid-cols-4"
@@ -83,9 +68,8 @@ export default function AboutPage() {
             </div>
           ))}
         </Reveal>
-      </header>
+      </div>
 
-      {/* A.01 Our approach */}
       <SectionShell marker="A.01" title="Our approach">
         <div className="flex flex-col gap-12">
           <Reveal>
@@ -107,7 +91,6 @@ export default function AboutPage() {
         </div>
       </SectionShell>
 
-      {/* A.02 Background */}
       <SectionShell marker="A.02" title="Background">
         <div className="flex flex-col gap-6">
           {ABOUT_BACKGROUND.map((para, i) => (
@@ -122,7 +105,6 @@ export default function AboutPage() {
         </div>
       </SectionShell>
 
-      {/* A.03 Collaborations */}
       <SectionShell marker="A.03" title="Collaborations">
         <Reveal
           as="p"
@@ -145,7 +127,6 @@ export default function AboutPage() {
         </div>
       </SectionShell>
 
-      {/* A.04 Core capabilities */}
       <SectionShell marker="A.04" title="Core capabilities">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
           {ABOUT_CAPABILITIES.map((group) => (
@@ -166,21 +147,22 @@ export default function AboutPage() {
         </div>
       </SectionShell>
 
-      {/* CTA */}
       <section className="mx-auto max-w-[1400px] border-t border-ink/10 py-24 md:py-36">
         <Reveal className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
           <h2 className="text-display max-w-2xl text-[clamp(2rem,5vw,4rem)]">
             Let&apos;s make something considered.
           </h2>
-          <TransitionLink
-            href="/contact"
-            className="group inline-flex items-center gap-3 rounded-full bg-ink px-7 py-3.5 text-sm font-medium text-paper"
-          >
-            Start a project
-            <span className="inline-block transition-transform duration-500 group-hover:translate-x-1">
-              ↗
-            </span>
-          </TransitionLink>
+          <Magnetic>
+            <TransitionLink
+              href="/contact"
+              className="group inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-sm font-medium text-paper"
+            >
+              Start a project
+              <span className="inline-block transition-transform duration-500 group-hover:translate-x-1">
+                ↗
+              </span>
+            </TransitionLink>
+          </Magnetic>
         </Reveal>
       </section>
     </main>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/motion/Reveal";
 import LineReveal from "@/components/motion/LineReveal";
@@ -29,12 +30,29 @@ export async function generateMetadata({
   };
 }
 
-function MediaPlate({ index }: { index: string }) {
+function MediaPlate({
+  index,
+  cover,
+}: {
+  index: string;
+  cover?: string;
+}) {
   return (
     <span className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden border border-ink/10 bg-paper-deep">
-      <span className="text-display select-none text-[clamp(6rem,18vw,16rem)] font-extralight leading-none text-ink/[0.06]">
-        {index}
-      </span>
+      {cover ? (
+        <Image
+          src={cover}
+          alt=""
+          fill
+          sizes="(min-width: 768px) 1400px, 100vw"
+          className="object-cover"
+          priority
+        />
+      ) : (
+        <span className="text-display select-none text-[clamp(6rem,18vw,16rem)] font-extralight leading-none text-ink/[0.06]">
+          {index}
+        </span>
+      )}
     </span>
   );
 }
@@ -81,6 +99,7 @@ export default async function ProjectPage({
 
         <LineReveal
           as="h1"
+          waitForIntro={false}
           delay={0.15}
           className="text-display mt-8 text-[clamp(2.75rem,9vw,8rem)]"
           lines={[project.title]}
@@ -97,7 +116,7 @@ export default async function ProjectPage({
       {/* Hero media */}
       <div className="mx-auto mt-16 max-w-[1400px] md:mt-24">
         <Reveal>
-          <MediaPlate index={project.index} />
+          <MediaPlate index={project.index} cover={project.cover} />
         </Reveal>
       </div>
 
@@ -177,16 +196,27 @@ export default async function ProjectPage({
 
       {/* Secondary media */}
       <div className="mx-auto mt-20 grid max-w-[1400px] grid-cols-1 gap-6 md:mt-28 md:grid-cols-2">
-        <Reveal>
-          <span className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden border border-ink/10 bg-paper-deep">
-            <span className="label">{project.detail.client}</span>
-          </span>
-        </Reveal>
-        <Reveal className="md:mt-16">
-          <span className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden border border-ink/10 bg-paper-deep">
-            <span className="label">{project.category}</span>
-          </span>
-        </Reveal>
+        {(project.gallery ?? [project.cover, project.cover])
+          .slice(0, 2)
+          .map((src, i) => (
+            <Reveal key={src ?? i} className={i === 1 ? "md:mt-16" : undefined}>
+              <span className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden border border-ink/10 bg-paper-deep">
+                {src ? (
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    sizes="(min-width: 768px) 700px, 100vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <span className="label">
+                    {i === 0 ? project.detail.client : project.category}
+                  </span>
+                )}
+              </span>
+            </Reveal>
+          ))}
       </div>
 
       {/* Next project */}

@@ -3,8 +3,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import RouteTransition from "@/components/providers/RouteTransition";
+import { IntroProvider } from "@/components/providers/IntroContext";
+import IntroLoader from "@/components/providers/IntroLoader";
 import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
+import SectionIndex from "@/components/site/SectionIndex";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,13 +53,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="antialiased">
-        <SmoothScroll>
-          <RouteTransition>
-            <Nav />
-            {children}
-            <Footer />
-          </RouteTransition>
-        </SmoothScroll>
+        <IntroProvider>
+          <SmoothScroll>
+            <RouteTransition>
+              <IntroLoader />
+              <Nav />
+              <SectionIndex />
+              {children}
+              <Footer />
+            </RouteTransition>
+          </SmoothScroll>
+        </IntroProvider>
       </body>
     </html>
   );
