@@ -73,14 +73,15 @@ export default function ProjectRotunda({
           end: "bottom bottom",
           scrub: 0.45,
           invalidateOnRefresh: true,
-          snap:
-            total > 1
-              ? {
+          ...(total > 1
+            ? {
+                snap: {
                   snapTo: 1 / (total - 1),
                   duration: { min: 0.1, max: 0.35 },
                   ease: "power1.inOut",
-                }
-              : false,
+                },
+              }
+            : {}),
           onUpdate: (self) => {
             const next = Math.round(self.progress * (total - 1));
             setIndex((prev) => (prev === next ? prev : next));
